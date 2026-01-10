@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PingPanther - Self-Hosted Uptime Monitoring & Status Pages</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Open source uptime monitoring solution. Monitor your API, website, and servers with real-time alerts. Self-hosted alternative to Better Uptime and UptimeRobot.">
+    <meta name="keywords"
+        content="uptime monitoring, status page, open source, pingpanther, server monitoring, self-hosted, devops tools, better uptime alternative">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://pingpanther.online/">
+    <meta property="og:title" content="PingPanther - Self-Hosted Uptime Monitoring">
+    <meta property="og:description"
+        content="Monitor your infrastructure with style. Real-time alerts, beautiful status pages, and unlimited checks.">
+
+    <!-- Twitter Card -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://pingpanther.online/">
+    <meta property="twitter:title" content="PingPanther - Self-Hosted Uptime Monitoring">
+    <meta property="twitter:description"
+        content="Monitor your infrastructure with style. Real-time alerts, beautiful status pages, and unlimited checks.">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .gradient-bg {
+            background: radial-gradient(ellipse at center, rgba(255, 119, 0, 0.08) 0%, rgba(0, 0, 0, 0) 50%);
+        }
+
+        .glow-border {
+            box-shadow: 0 0 20px rgba(255, 119, 0, 0.15);
+        }
+
+        .feature-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(255, 119, 0, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-blur {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .float-animation {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .code-block {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            border: 1px solid rgba(255, 119, 0, 0.3);
+        }
+    </style>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#fff7ed',
+                            100: '#ffedd5',
+                            200: '#fed7aa',
+                            300: '#fdba74',
+                            400: '#fb923c',
+                            500: '#f97316',
+                            600: '#ea580c',
+                            700: '#c2410c',
+                            800: '#9a3412',
+                            900: '#7c2d12',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-black text-white antialiased">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 border-b border-white/5 bg-black/80 nav-blur">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <a href="/" class="flex items-center gap-2 group">
+                    <div
+                        class="w-9 h-9 bg-gradient-to-br from-orange-500 to-red-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <i data-lucide="zap" class="w-5 h-5 text-white"></i>
+                    </div>
+                    <span class="text-xl font-black">PingPanther</span>
+                </a>
+
+                <!-- Navigation Links -->
+                <div class="flex items-center gap-6">
+                    <a href="docs.html"
+                        class="text-sm text-gray-400 hover:text-white transition-colors">Documentation</a>
+                    <a href="https://github.com/paramientos/pingpantherio" target="_blank"
+                        class="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors">
+                        <i data-lucide="github" class="w-4 h-4"></i>
+                        GitHub
+                    </a>
+                    <a href="/login"
+                        class="px-4 py-2 bg-orange-600 hover:bg-orange-700 rounded-lg text-sm font-semibold transition-colors">
+                        Try Demo
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 px-6 gradient-bg">
+        <div class="max-w-5xl mx-auto text-center">
+            <!-- Badge -->
+            <div
+                class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-500/10 border border-orange-500/20 mb-8">
+                <span class="w-2 h-2 bg-orange-500 rounded-full animate-pulse"></span>
+                <span class="text-sm font-semibold text-orange-400">OPEN SOURCE • SELF-HOSTED</span>
+            </div>
+
+            <!-- Headline -->
+            <h1 class="text-5xl md:text-7xl font-black mb-6 leading-tight tracking-tight">
+                Deploy Your Own <br>
+                <span class="text-orange-500">Uptime Monitoring</span> <br>
+                <span class="text-green-500">in 60 Seconds</span>
+            </h1>
+
+            <!-- Subheadline -->
+            <p class="text-xl text-gray-400 mb-10 max-w-3xl mx-auto leading-relaxed">
+                Self-hosted uptime monitoring that alerts you before your customers notice.
+                Track websites, APIs, servers, SSL certificates, and cron jobs from a single dashboard.
+            </p>
+
+            <!-- CTA Buttons -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
+                <a href="/login"
+                    class="group px-8 py-4 bg-orange-600 hover:bg-orange-700 rounded-lg font-bold text-lg flex items-center gap-2 transition-all hover:scale-105 glow-border">
+                    Try Live Demo
+                    <i data-lucide="rocket" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+                </a>
+                <a href="https://github.com/paramientos/pingpantherio" target="_blank"
+                    class="px-8 py-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg font-semibold text-lg flex items-center gap-2 transition-all">
+                    <i data-lucide="github" class="w-5 h-5"></i>
+                    View Source
+                </a>
+            </div>
+
+            <!-- Value Props -->
+            <div class="flex flex-wrap items-center justify-center gap-6 text-sm text-gray-400">
+                <div class="flex items-center gap-2">
+                    <i data-lucide="check-circle" class="w-4 h-4 text-green-500"></i>
+                    <span>No Docker Required</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <i data-lucide="check-circle" class="w-4 h-4 text-green-500"></i>
+                    <span>Free SSL Certificates</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <i data-lucide="check-circle" class="w-4 h-4 text-green-500"></i>
+                    <span>Production Ready</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Installation Steps -->
+    <section id="installation" class="py-24 px-6 bg-white/[0.01]">
+        <div class="max-w-7xl mx-auto">
+            <!-- Section Header -->
+            <div class="text-center mb-20">
+                <div class="inline-block px-4 py-2 bg-orange-500/10 border border-orange-500/20 rounded-full mb-4">
+                    <span class="text-sm font-bold text-orange-400">QUICK START</span>
+                </div>
+                <h2 class="text-4xl md:text-5xl font-black mb-4 tracking-tight">
+                    Ready in 3 Simple Steps
+                </h2>
+            </div>
+
+            <!-- Steps Grid -->
+            <div class="grid md:grid-cols-3 gap-12">
+                <!-- Step 1 -->
+                <div class="text-center group">
+                    <div
+                        class="w-20 h-20 mx-auto mb-6 bg-orange-500/10 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <i data-lucide="server" class="w-10 h-10 text-orange-500"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3">1. Prepare</h3>
+                    <p class="text-gray-400 max-w-xs mx-auto">
+                        Get a fresh Ubuntu 24.04 server. Any VPS provider works. Minimum 2GB RAM.
+                    </p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="text-center group">
+                    <div
+                        class="w-20 h-20 mx-auto mb-6 bg-orange-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform float-animation">
+                        <i data-lucide="terminal" class="w-10 h-10 text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3">2. Install</h3>
+                    <p class="text-gray-400 max-w-xs mx-auto mb-4">
+                        Run our magic command. It installs the entire stack and configures your domain.
+                    </p>
+                    <div class="code-block rounded-lg p-3 text-xs text-orange-400 font-mono max-w-xs mx-auto">
+                        bash &lt;(curl -sSL https://pingpanther.online/install.sh)
+                    </div>
+                    <a href="docs.html"
+                        class="inline-block mt-3 text-xs text-orange-500 hover:text-orange-400 font-semibold">
+                        View Installation Docs →
+                    </a>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="text-center group">
+                    <div
+                        class="w-20 h-20 mx-auto mb-6 bg-green-500/10 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <i data-lucide="rocket" class="w-10 h-10 text-green-500"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3">3. Monitor</h3>
+                    <p class="text-gray-400 max-w-xs mx-auto mb-4">
+                        Login to your dashboard. Your admin account is ready. Start monitoring instantly.
+                    </p>
+                    <a href="/login"
+                        class="inline-flex items-center gap-2 text-green-500 hover:text-green-400 font-semibold text-sm">
+                        Try Demo
+                        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-24 px-6">
+        <div class="max-w-7xl mx-auto">
+            <!-- Section Header -->
+            <div class="text-center mb-16">
+                <div class="inline-block px-4 py-2 bg-orange-500/10 border border-orange-500/20 rounded-full mb-4">
+                    <span class="text-sm font-bold text-orange-400">FEATURES</span>
+                </div>
+                <h2 class="text-4xl md:text-5xl font-black mb-4 tracking-tight">
+                    Enterprise-Grade Monitoring
+                </h2>
+                <p class="text-xl text-gray-400 max-w-2xl mx-auto">
+                    Everything you need to keep your infrastructure running smoothly
+                </p>
+            </div>
+
+            <!-- Features Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Feature 1 -->
+                <div class="feature-card p-8 bg-white/[0.01] border border-white/5 rounded-2xl">
+                    <div class="w-12 h-12 bg-orange-500/10 rounded-xl flex items-center justify-center mb-6">
+                        <i data-lucide="server" class="w-6 h-6 text-orange-500"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Multi-Protocol Monitoring</h3>
+                    <p class="text-gray-400 mb-4 leading-relaxed">
+                        Monitor HTTP/HTTPS endpoints, TCP ports, ICMP ping, DNS records, and SSL certificates. Support
+                        for custom heartbeat URLs for cron job monitoring.
+                    </p>
+                    <ul class="space-y-2">
+                        <li class="flex items-center gap-2 text-sm text-gray-400">
+                            <i data-lucide="check" class="w-4 h-4 text-green-500"></i>
+                            HTTP/HTTPS checks
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-400">
+                            <i data-lucide="check" class="w-4 h-4 text-green-500"></i>
+                            TCP port monitoring
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-400">
+                            <i data-lucide="check" class="w-4 h-4 text-green-500"></i>
+                            Ping (ICMP)
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-400">
+                            <i data-lucide="check" class="w-4 h-4 text-green-500"></i>
+                            DNS validation
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-400">
+                            <i data-lucide="check" class="w-4 h-4 text-green-500"></i>
+                            SSL certificate tracking
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-400">
+                            <i data-lucide="check" class="w-4 h-4 text-green-500"></i>
+                            Heartbeat/Push monitors
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="feature-card p-8 bg-white/[0.01] border border-white/5 rounded-2xl">
+                    <div class="w-12 h-12 bg-orange-500/10 rounded-xl flex items-center justify-center mb-6">
+                        <i data-lucide="shield-check" class="w-6 h-6 text-orange-500"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Smart Alert System</h3>
+                    <p class="text-gray-400 mb-4 leading-relaxed">
+                        Multi-channel notifications with intelligent escalation policies. Never miss a critical incident
+                        again.
+                    </p>
+                    <ul class="space-y-2">
+                        <li class="flex items-center gap-2 text-sm text-gray-400">
+                            <i data-lucide="check" class="w-4 h-4 text-green-500"></i>
+                            Email notifications
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-400">
+                            <i data-lucide="check" class="w-4 h-4 text-green-500"></i>
+                            Slack integration
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-400">
+                            <i data-lucide="check" class="w-4 h-4 text-green-500"></i>
+                            Discord webhooks
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-400">
+                            <i data-lucide="check" class="w-4 h-4 text-green-500"></i>
+                            Custom webhooks
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-400">
+                            <i data-lucide="check" class="w-4 h-4 text-green-500"></i>
+                            Multi-tier escalation
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-400">
+                            <i data-lucide="check" class="w-4 h-4 text-green-500"></i>
+                            Alert grouping
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="feature-card p-8 bg-white/[0.01] border border-white/5 rounded-2xl">
+                    <div class="w-12 h-12 bg-orange-500/10 rounded-xl flex items-center justify-center mb-6">
+                        <i data-lucide="clock" class="w-6 h-6 text-orange-500"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Public Status Pages</h3>
+                    <p class="text-gray-400 mb-4 leading-relaxed">
+                        Beautiful, customizable status pages for your customers. Show real-time uptime and incident
+                        history.
+                    </p>
+                    <ul class="space-y-2">
+                        <li class="flex items-center gap-2 text-sm text-gray-400">
+                            <i data-lucide="check" class="w-4 h-4 text-green-500"></i>
+                            Custom branding
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-400">
+                            <i data-lucide="check" class="w-4 h-4 text-green-500"></i>
+                            Custom domains
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-400">
+                            <i data-lucide="check" class="w-4 h-4 text-green-500"></i>
+                            Incident timeline
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-400">
+                            <i data-lucide="check" class="w-4 h-4 text-green-500"></i>
+                            Scheduled maintenance
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-400">
+                            <i data-lucide="check" class="w-4 h-4 text-green-500"></i>
+                            Subscriber notifications
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-400">
+                            <i data-lucide="check" class="w-4 h-4 text-green-500"></i>
+                            Embed widgets
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="feature-card p-8 bg-white/[0.01] border border-white/5 rounded-2xl">
+                    <div class="w-12 h-12 bg-orange-500/10 rounded-xl flex items-center justify-center mb-6">
+                        <i data-lucide="zap" class="w-6 h-6 text-orange-500"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">High Performance</h3>
+                    <p class="text-gray-400 mb-4 leading-relaxed">
+                        Built on Laravel with Redis caching and Horizon queue management. Handles thousands of checks
+                        per minute.
+                    </p>
+                    <ul class="space-y-2">
+                        <li class="flex items-center gap-2 text-sm text-gray-400">
+                            <i data-lucide="check" class="w-4 h-4 text-green-500"></i>
+                            Redis caching
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-400">
+                            <i data-lucide="check" class="w-4 h-4 text-green-500"></i>
+                            Laravel Horizon
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-400">
+                            <i data-lucide="check" class="w-4 h-4 text-green-500"></i>
+                            OPcache optimization
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-400">
+                            <i data-lucide="check" class="w-4 h-4 text-green-500"></i>
+                            Database indexing
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-400">
+                            <i data-lucide="check" class="w-4 h-4 text-green-500"></i>
+                            Async processing
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-400">
+                            <i data-lucide="check" class="w-4 h-4 text-green-500"></i>
+                            Sub-second checks
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Feature 5 -->
+                <div class="feature-card p-8 bg-white/[0.01] border border-white/5 rounded-2xl">
+                    <div class="w-12 h-12 bg-orange-500/10 rounded-xl flex items-center justify-center mb-6">
+                        <i data-lucide="check-circle" class="w-6 h-6 text-orange-500"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Automated Recovery</h3>
+                    <p class="text-gray-400 mb-4 leading-relaxed">
+                        Self-healing capabilities through webhook-based recovery actions. Automatically restart services
+                        or trigger remediation.
+                    </p>
+                    <ul class="space-y-2">
+                        <li class="flex items-center gap-2 text-sm text-gray-400">
+                            <i data-lucide="check" class="w-4 h-4 text-green-500"></i>
+                            Webhook triggers
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-400">
+                            <i data-lucide="check" class="w-4 h-4 text-green-500"></i>
+                            Custom scripts
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-400">
+                            <i data-lucide="check" class="w-4 h-4 text-green-500"></i>
+                            Auto-restart services
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-400">
+                            <i data-lucide="check" class="w-4 h-4 text-green-500"></i>
+                            Retry logic
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-400">
+                            <i data-lucide="check" class="w-4 h-4 text-green-500"></i>
+                            Recovery logs
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-400">
+                            <i data-lucide="check" class="w-4 h-4 text-green-500"></i>
+                            Success tracking
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Feature 6 -->
+                <div class="feature-card p-8 bg-white/[0.01] border border-white/5 rounded-2xl">
+                    <div class="w-12 h-12 bg-orange-500/10 rounded-xl flex items-center justify-center mb-6">
+                        <i data-lucide="rocket" class="w-6 h-6 text-orange-500"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Production Ready</h3>
+                    <p class="text-gray-400 mb-4 leading-relaxed">
+                        Battle-tested infrastructure with systemd services, automatic restarts, and comprehensive
+                        logging.
+                    </p>
+                    <ul class="space-y-2">
+                        <li class="flex items-center gap-2 text-sm text-gray-400">
+                            <i data-lucide="check" class="w-4 h-4 text-green-500"></i>
+                            Systemd integration
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-400">
+                            <i data-lucide="check" class="w-4 h-4 text-green-500"></i>
+                            Auto-restart
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-400">
+                            <i data-lucide="check" class="w-4 h-4 text-green-500"></i>
+                            Log rotation
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-400">
+                            <i data-lucide="check" class="w-4 h-4 text-green-500"></i>
+                            Database backups
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-400">
+                            <i data-lucide="check" class="w-4 h-4 text-green-500"></i>
+                            Health checks
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-400">
+                            <i data-lucide="check" class="w-4 h-4 text-green-500"></i>
+                            Zero-downtime updates
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Self-Hosted Section -->
+    <section class="py-24 px-6 bg-white/[0.01]">
+        <div class="max-w-5xl mx-auto">
+            <!-- Section Header -->
+            <div class="text-center mb-16">
+                <div class="inline-block px-4 py-2 bg-orange-500/10 border border-orange-500/20 rounded-full mb-4">
+                    <span class="text-sm font-bold text-orange-400">WHY SELF-HOST?</span>
+                </div>
+                <h2 class="text-4xl md:text-5xl font-black mb-4 tracking-tight">
+                    Your Data, Your Control
+                </h2>
+            </div>
+
+            <!-- Benefits Grid -->
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="flex gap-4">
+                    <div class="flex-shrink-0">
+                        <div class="w-12 h-12 bg-green-500/10 rounded-xl flex items-center justify-center">
+                            <i data-lucide="check" class="w-6 h-6 text-green-500"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold mb-2">No Monthly Fees</h3>
+                        <p class="text-gray-400">Pay once for your VPS. No per-monitor pricing.</p>
+                    </div>
+                </div>
+
+                <div class="flex gap-4">
+                    <div class="flex-shrink-0">
+                        <div class="w-12 h-12 bg-green-500/10 rounded-xl flex items-center justify-center">
+                            <i data-lucide="check" class="w-6 h-6 text-green-500"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold mb-2">Complete Privacy</h3>
+                        <p class="text-gray-400">Your monitoring data never leaves your server.</p>
+                    </div>
+                </div>
+
+                <div class="flex gap-4">
+                    <div class="flex-shrink-0">
+                        <div class="w-12 h-12 bg-green-500/10 rounded-xl flex items-center justify-center">
+                            <i data-lucide="check" class="w-6 h-6 text-green-500"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold mb-2">Unlimited Monitors</h3>
+                        <p class="text-gray-400">Monitor as many services as your server can handle.</p>
+                    </div>
+                </div>
+
+                <div class="flex gap-4">
+                    <div class="flex-shrink-0">
+                        <div class="w-12 h-12 bg-green-500/10 rounded-xl flex items-center justify-center">
+                            <i data-lucide="check" class="w-6 h-6 text-green-500"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold mb-2">Customizable</h3>
+                        <p class="text-gray-400">Full source code access. Modify anything you want.</p>
+                    </div>
+                </div>
+
+                <div class="flex gap-4">
+                    <div class="flex-shrink-0">
+                        <div class="w-12 h-12 bg-green-500/10 rounded-xl flex items-center justify-center">
+                            <i data-lucide="check" class="w-6 h-6 text-green-500"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold mb-2">No Vendor Lock-in</h3>
+                        <p class="text-gray-400">Export your data anytime. Switch providers freely.</p>
+                    </div>
+                </div>
+
+                <div class="flex gap-4">
+                    <div class="flex-shrink-0">
+                        <div class="w-12 h-12 bg-green-500/10 rounded-xl flex items-center justify-center">
+                            <i data-lucide="check" class="w-6 h-6 text-green-500"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold mb-2">Enterprise Support</h3>
+                        <p class="text-gray-400">Community support on GitHub. Paid support available.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="py-24 px-6">
+        <div class="max-w-3xl mx-auto">
+            <div class="relative p-12 md:p-16 rounded-3xl border-2 border-orange-500/30 text-center overflow-hidden">
+                <!-- Gradient Background -->
+                <div class="absolute inset-0 bg-gradient-to-br from-orange-500/10 via-transparent to-transparent"></div>
+
+                <!-- Content -->
+                <div class="relative z-10">
+                    <div class="w-16 h-16 mx-auto mb-6 bg-orange-500/20 rounded-2xl flex items-center justify-center">
+                        <i data-lucide="download" class="w-8 h-8 text-orange-500"></i>
+                    </div>
+                    <h2 class="text-4xl md:text-5xl font-black mb-4 tracking-tight">
+                        Ready to Deploy?
+                    </h2>
+                    <p class="text-xl text-gray-400 mb-8 max-w-lg mx-auto">
+                        Join hundreds of teams who trust PingPanther to monitor their infrastructure.
+                    </p>
+                    <a href="docs.html"
+                        class="inline-flex items-center gap-3 px-10 py-5 bg-orange-600 hover:bg-orange-700 rounded-xl font-bold text-xl transition-all hover:scale-105 glow-border">
+                        Install Now
+                        <i data-lucide="arrow-right" class="w-6 h-6"></i>
+                    </a>
+                    <p class="mt-6 text-sm text-gray-500">
+                        Takes less than 2 minutes • Free forever • Open source
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6 border-t border-white/5">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                <p class="text-sm text-gray-500">© 2026 PingPanther. Open Source.</p>
+                <div class="flex items-center gap-8">
+                    <a href="docs.html"
+                        class="text-sm text-gray-500 hover:text-white transition-colors">Documentation</a>
+                    <a href="https://github.com/paramientos/pingpantherio" target="_blank"
+                        class="text-sm text-gray-500 hover:text-white transition-colors">GitHub</a>
+                    <a href="/login" class="text-sm text-gray-500 hover:text-white transition-colors">Demo</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Initialize Lucide Icons -->
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>

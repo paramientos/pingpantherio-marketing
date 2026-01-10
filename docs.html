@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation - PingPanther</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Official documentation for PingPanther. Learn how to install, configure, and use your self-hosted uptime monitoring dashboard.">
+    <meta property="og:title" content="PingPanther Documentation">
+    <meta property="og:description" content="Everything you need to know about setting up and managing PingPanther.">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        code,
+        pre {
+            font-family: 'Fira Code', monospace;
+        }
+
+        .nav-blur {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .sidebar-link {
+            transition: all 0.2s ease;
+        }
+
+        .sidebar-link:hover {
+            background: rgba(255, 119, 0, 0.1);
+            border-left-color: rgba(255, 119, 0, 0.5);
+        }
+
+        .sidebar-link.active {
+            background: rgba(255, 119, 0, 0.15);
+            border-left-color: #f97316;
+            font-weight: 700;
+        }
+
+        .code-block {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            border: 1px solid rgba(255, 119, 0, 0.2);
+        }
+    </style>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#fff7ed',
+                            100: '#ffedd5',
+                            200: '#fed7aa',
+                            300: '#fdba74',
+                            400: '#fb923c',
+                            500: '#f97316',
+                            600: '#ea580c',
+                            700: '#c2410c',
+                            800: '#9a3412',
+                            900: '#7c2d12',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-black text-white antialiased">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 border-b border-white/5 bg-black/80 nav-blur">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <div class="flex items-center gap-4">
+                    <a href="index.html" class="flex items-center gap-2 group">
+                        <div
+                            class="w-9 h-9 bg-gradient-to-br from-orange-500 to-red-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <i data-lucide="zap" class="w-5 h-5 text-white"></i>
+                        </div>
+                        <span class="text-xl font-black">PingPanther</span>
+                    </a>
+                    <span class="text-sm text-gray-500">/ Documentation</span>
+                </div>
+
+                <!-- Navigation Links -->
+                <div class="flex items-center gap-4">
+                    <a href="index.html"
+                        class="flex items-center gap-2 px-3 py-2 text-sm text-gray-400 hover:text-white transition-colors">
+                        <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                        Back to Home
+                    </a>
+                    <a href="https://github.com/paramientos/pingpantherio" target="_blank"
+                        class="flex items-center gap-2 px-3 py-2 text-sm text-gray-400 hover:text-white transition-colors">
+                        <i data-lucide="github" class="w-4 h-4"></i>
+                        GitHub
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="pt-20 pb-16 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex gap-8">
+                <!-- Sidebar -->
+                <aside class="w-64 flex-shrink-0 sticky top-24 h-fit">
+                    <nav class="space-y-1">
+                        <a href="#installation"
+                            class="sidebar-link active flex items-center gap-3 px-4 py-3 rounded-lg border-l-4 border-transparent">
+                            <i data-lucide="rocket" class="w-5 h-5 text-orange-500"></i>
+                            <span>Installation</span>
+                        </a>
+                        <a href="#configuration"
+                            class="sidebar-link flex items-center gap-3 px-4 py-3 rounded-lg border-l-4 border-transparent">
+                            <i data-lucide="settings" class="w-5 h-5 text-orange-500"></i>
+                            <span>Configuration</span>
+                        </a>
+                        <a href="#usage"
+                            class="sidebar-link flex items-center gap-3 px-4 py-3 rounded-lg border-l-4 border-transparent">
+                            <i data-lucide="book" class="w-5 h-5 text-orange-500"></i>
+                            <span>Usage Guide</span>
+                        </a>
+                        <a href="#api"
+                            class="sidebar-link flex items-center gap-3 px-4 py-3 rounded-lg border-l-4 border-transparent">
+                            <i data-lucide="terminal" class="w-5 h-5 text-orange-500"></i>
+                            <span>API Reference</span>
+                        </a>
+                    </nav>
+                </aside>
+
+                <!-- Content Area -->
+                <main class="flex-1 max-w-4xl">
+                    <div class="bg-white/[0.01] border border-white/5 rounded-2xl p-8 md:p-12">
+
+                        <!-- Installation Section -->
+                        <section id="installation" class="space-y-8">
+                            <div>
+                                <h2 class="text-3xl font-black mb-4">Quick Installation</h2>
+                                <p class="text-gray-400 text-lg">
+                                    PingPanther can be installed on a fresh Ubuntu 24.04 LTS server with a single
+                                    command.
+                                </p>
+                            </div>
+
+                            <!-- Requirements -->
+                            <div>
+                                <h3 class="text-xl font-bold mb-4">Requirements</h3>
+                                <div class="bg-white/[0.02] border border-white/5 rounded-xl p-6">
+                                    <ul class="space-y-2 text-gray-300">
+                                        <li>• Ubuntu 24.04 LTS (fresh installation recommended)</li>
+                                        <li>• Minimum: 2GB RAM, 1 CPU core</li>
+                                        <li>• Recommended: 4GB RAM, 2 CPU cores</li>
+                                        <li>• Root access (sudo is not enough)</li>
+                                        <li>• A domain name pointing to your server (optional, for SSL)</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Installation Command -->
+                            <div>
+                                <h3 class="text-xl font-bold mb-4">Installation Command</h3>
+                                <p class="text-gray-400 mb-4">
+                                    SSH into your server and run the following command:
+                                </p>
+                                <div class="code-block rounded-xl p-6 overflow-x-auto">
+                                    <code
+                                        class="text-orange-400 text-sm">bash &lt;(curl -sSL https://raw.githubusercontent.com/paramientos/pingpantherio/main/install.sh)</code>
+                                </div>
+                                <p class="text-sm text-gray-400 mt-4">
+                                    The installer will interactively prompt you for:
+                                </p>
+                                <div class="mt-3 bg-orange-500/5 border border-orange-500/20 rounded-xl p-4">
+                                    <ul class="space-y-1 text-sm text-gray-300">
+                                        <li>• Domain name (or it will use your server IP)</li>
+                                        <li>• Admin email address</li>
+                                        <li>• Password will be auto-generated securely</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- What Gets Installed -->
+                            <div>
+                                <h3 class="text-xl font-bold mb-4">What Gets Installed</h3>
+                                <div class="bg-orange-500/5 border border-orange-500/20 rounded-xl p-6">
+                                    <p class="font-semibold mb-3">The installer automatically sets up:</p>
+                                    <ul class="space-y-2 text-gray-300">
+                                        <li>• PHP 8.4 with FPM and required extensions</li>
+                                        <li>• Nginx web server</li>
+                                        <li>• PostgreSQL database</li>
+                                        <li>• Redis for caching and queues</li>
+                                        <li>• Laravel Horizon for queue management</li>
+                                        <li>• Let's Encrypt SSL certificates (if domain provided)</li>
+                                        <li>• Systemd services for auto-restart</li>
+                                        <li>• Production optimizations (OPcache, route caching)</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- First Login -->
+                            <div>
+                                <h3 class="text-xl font-bold mb-4">First Login</h3>
+                                <p class="text-gray-400 mb-4">
+                                    After installation completes, access your dashboard at <code
+                                        class="px-2 py-1 bg-white/5 rounded text-orange-400 text-sm">https://yourdomain.com</code>
+                                </p>
+                                <div class="bg-green-500/5 border border-green-500/20 rounded-xl p-6 mb-4">
+                                    <p class="font-semibold mb-3">Your Credentials:</p>
+                                    <p class="text-sm text-gray-400 mb-3">
+                                        At the end of installation, the script will display your admin credentials.
+                                    </p>
+                                    <ul class="space-y-2 text-sm text-gray-300">
+                                        <li>• Email: The email you provided during installation</li>
+                                        <li>• Password: Auto-generated secure password (save it!)</li>
+                                    </ul>
+                                    <p class="text-sm text-orange-400 font-semibold mt-4">
+                                        💡 Make sure to save these credentials immediately!
+                                    </p>
+                                </div>
+
+                                <div class="bg-green-500/10 border border-green-500/40 rounded-xl p-6">
+                                    <h4 class="text-lg font-bold text-green-400 mb-2">Try Live Demo</h4>
+                                    <p class="text-sm text-gray-400 mb-4">
+                                        Want to try PingPanther before installing? Access our demo instance with
+                                        pre-filled credentials.
+                                    </p>
+                                    <a href="/login"
+                                        class="block w-full px-6 py-3 bg-green-600 hover:bg-green-700 rounded-lg text-center font-semibold transition-colors">
+                                        Access Demo Dashboard
+                                    </a>
+                                </div>
+                            </div>
+                        </section>
+
+                        <div class="border-t border-white/5 my-12"></div>
+
+                        <!-- Configuration Section -->
+                        <section id="configuration" class="space-y-8">
+                            <div>
+                                <h2 class="text-3xl font-black mb-4">Post-Installation Configuration</h2>
+                                <p class="text-gray-400 text-lg">
+                                    After installation, you may want to configure additional settings for your
+                                    production environment.
+                                </p>
+                            </div>
+
+                            <!-- Email Settings -->
+                            <div>
+                                <h3 class="text-xl font-bold mb-4">Email Settings</h3>
+                                <p class="text-gray-400 mb-4">
+                                    To receive email alerts, update your <code
+                                        class="px-2 py-1 bg-white/5 rounded text-orange-400 text-sm">.env</code> file
+                                    located at <code
+                                        class="px-2 py-1 bg-white/5 rounded text-orange-400 text-sm">/var/www/pingpanther/.env</code>
+                                </p>
+                                <div class="code-block rounded-xl p-6 overflow-x-auto">
+                                    <pre class="text-orange-400 text-sm"><code>MAIL_MAILER=smtp
+MAIL_HOST=smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=your_username
+MAIL_PASSWORD=your_password
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS="alerts@yourdomain.com"
+MAIL_FROM_NAME="PingPanther Alerts"</code></pre>
+                                </div>
+                                <p class="text-sm text-gray-400 mt-4">
+                                    After updating, clear the cache:
+                                </p>
+                                <div class="code-block rounded-xl p-4 overflow-x-auto mt-3">
+                                    <code class="text-orange-400 text-sm">php artisan config:cache</code>
+                                </div>
+                            </div>
+
+                            <!-- Laravel Horizon -->
+                            <div>
+                                <h3 class="text-xl font-bold mb-4">Laravel Horizon</h3>
+                                <p class="text-gray-400 mb-4">
+                                    Horizon provides a dashboard for your Redis queues at <code
+                                        class="px-2 py-1 bg-white/5 rounded text-orange-400 text-sm">/horizon</code>
+                                </p>
+                                <div class="bg-white/[0.02] border border-white/5 rounded-xl p-6">
+                                    <p class="mb-3">To restart Horizon after code changes:</p>
+                                    <div class="code-block rounded-xl p-4 overflow-x-auto">
+                                        <code
+                                            class="text-orange-400 text-sm">sudo systemctl restart pingpanther-horizon</code>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Updating PingPanther -->
+                            <div>
+                                <h3 class="text-xl font-bold mb-4">Updating PingPanther</h3>
+                                <p class="text-gray-400 mb-4">
+                                    To update to the latest version:
+                                </p>
+                                <div class="code-block rounded-xl p-6 overflow-x-auto">
+                                    <pre class="text-orange-400 text-sm"><code>cd /var/www/pingpanther
+git pull origin main
+composer install --no-dev --optimize-autoloader
+yarn install && yarn build
+php artisan migrate --force
+php artisan optimize
+sudo systemctl restart pingpanther-horizon</code></pre>
+                                </div>
+                            </div>
+
+                            <!-- Firewall Configuration -->
+                            <div>
+                                <h3 class="text-xl font-bold mb-4">Firewall Configuration</h3>
+                                <p class="text-gray-400 mb-4">
+                                    The installer configures UFW to allow HTTP and HTTPS. Check status:
+                                </p>
+                                <div class="code-block rounded-xl p-4 overflow-x-auto">
+                                    <code class="text-orange-400 text-sm">sudo ufw status</code>
+                                </div>
+                            </div>
+                        </section>
+
+                        <div class="border-t border-white/5 my-12"></div>
+
+                        <!-- Usage Guide Section -->
+                        <section id="usage" class="space-y-8">
+                            <div>
+                                <h2 class="text-3xl font-black mb-4">Getting Started</h2>
+                                <p class="text-gray-400 text-lg">
+                                    Learn how to create monitors, set up alerts, and manage your infrastructure
+                                    monitoring.
+                                </p>
+                            </div>
+
+                            <!-- Creating First Monitor -->
+                            <div>
+                                <h3 class="text-xl font-bold mb-4">Creating Your First Monitor</h3>
+                                <div class="bg-white/[0.02] border border-white/5 rounded-xl p-6">
+                                    <ol class="space-y-2 text-gray-300">
+                                        <li>1. Navigate to <strong>Monitors</strong> in the sidebar</li>
+                                        <li>2. Click <strong>Create Monitor</strong></li>
+                                        <li>3. Choose monitor type (HTTP, Ping, Port, etc.)</li>
+                                        <li>4. Enter your service URL or IP address</li>
+                                        <li>5. Set check interval (30s, 1m, 5m, etc.)</li>
+                                        <li>6. Click <strong>Save</strong></li>
+                                    </ol>
+                                </div>
+                            </div>
+
+                            <!-- Monitor Types -->
+                            <div>
+                                <h3 class="text-xl font-bold mb-4">Monitor Types</h3>
+                                <div class="space-y-3">
+                                    <div class="bg-white/[0.01] border border-white/5 rounded-xl p-4">
+                                        <h4 class="font-bold mb-1">HTTP/HTTPS</h4>
+                                        <p class="text-sm text-gray-400">Monitor websites and APIs. Checks for 2xx
+                                            status codes.</p>
+                                    </div>
+                                    <div class="bg-white/[0.01] border border-white/5 rounded-xl p-4">
+                                        <h4 class="font-bold mb-1">TCP Port</h4>
+                                        <p class="text-sm text-gray-400">Check if a specific port is open and accepting
+                                            connections.</p>
+                                    </div>
+                                    <div class="bg-white/[0.01] border border-white/5 rounded-xl p-4">
+                                        <h4 class="font-bold mb-1">Ping (ICMP)</h4>
+                                        <p class="text-sm text-gray-400">Simple ping check to verify server is
+                                            reachable.</p>
+                                    </div>
+                                    <div class="bg-white/[0.01] border border-white/5 rounded-xl p-4">
+                                        <h4 class="font-bold mb-1">Keyword Check</h4>
+                                        <p class="text-sm text-gray-400">Verify specific text appears on a webpage.</p>
+                                    </div>
+                                    <div class="bg-white/[0.01] border border-white/5 rounded-xl p-4">
+                                        <h4 class="font-bold mb-1">Push/Heartbeat</h4>
+                                        <p class="text-sm text-gray-400">Monitor cron jobs and scheduled tasks.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Setting Up Alerts -->
+                            <div>
+                                <h3 class="text-xl font-bold mb-4">Setting Up Alerts</h3>
+                                <p class="text-gray-400 mb-4">
+                                    Configure how you want to be notified when incidents occur:
+                                </p>
+                                <ul class="space-y-2 text-gray-300">
+                                    <li>• Navigate to <strong>Settings → Notification Channels</strong></li>
+                                    <li>• Add Email, Slack, Discord, or Webhook channels</li>
+                                    <li>• Create <strong>Escalation Policies</strong> for multi-tier alerts</li>
+                                    <li>• Assign policies to your monitors</li>
+                                </ul>
+                            </div>
+
+                            <!-- Status Pages -->
+                            <div>
+                                <h3 class="text-xl font-bold mb-4">Status Pages</h3>
+                                <p class="text-gray-400 mb-4">
+                                    Create public status pages for your customers:
+                                </p>
+                                <ul class="space-y-2 text-gray-300">
+                                    <li>• Go to <strong>Status Pages</strong></li>
+                                    <li>• Click <strong>Create Status Page</strong></li>
+                                    <li>• Select which monitors to display</li>
+                                    <li>• Customize branding and colors</li>
+                                    <li>• Share the public URL with your users</li>
+                                </ul>
+                            </div>
+                        </section>
+
+                        <div class="border-t border-white/5 my-12"></div>
+
+                        <!-- API Reference Section -->
+                        <section id="api" class="space-y-8">
+                            <div>
+                                <h2 class="text-3xl font-black mb-4">API Documentation</h2>
+                                <p class="text-gray-400 text-lg">
+                                    PingPanther provides a RESTful API for programmatic access to all features.
+                                </p>
+                            </div>
+
+                            <!-- Coming Soon -->
+                            <div class="text-center py-16">
+                                <div
+                                    class="w-20 h-20 mx-auto mb-6 bg-orange-500/10 rounded-2xl flex items-center justify-center">
+                                    <i data-lucide="terminal" class="w-10 h-10 text-orange-500"></i>
+                                </div>
+                                <h3 class="text-2xl font-bold mb-4">Developer API</h3>
+                                <div
+                                    class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-500/10 border border-orange-500/20 mb-6">
+                                    <span class="w-2 h-2 bg-orange-500 rounded-full"></span>
+                                    <span class="text-sm font-semibold text-orange-400">COMING SOON</span>
+                                </div>
+                                <p class="text-gray-400 max-w-2xl mx-auto mb-8">
+                                    We are working on a comprehensive REST API to allow you to manage monitors,
+                                    retrieve stats, and integrate PingPanther with your own tools programmatically.
+                                </p>
+
+                                <div class="bg-white/[0.02] border border-white/5 rounded-xl p-8 max-w-2xl mx-auto">
+                                    <p class="font-bold mb-4">Planned Endpoints</p>
+                                    <div class="flex flex-wrap justify-center gap-3">
+                                        <code
+                                            class="px-3 py-1 bg-white/5 rounded text-orange-400 text-sm">GET /api/monitors</code>
+                                        <code
+                                            class="px-3 py-1 bg-white/5 rounded text-orange-400 text-sm">POST /api/monitors</code>
+                                        <code
+                                            class="px-3 py-1 bg-white/5 rounded text-orange-400 text-sm">GET /api/incidents</code>
+                                        <code
+                                            class="px-3 py-1 bg-white/5 rounded text-orange-400 text-sm">GET /api/stats</code>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                    </div>
+                </main>
+            </div>
+        </div>
+    </div>
+
+    <!-- Initialize Lucide Icons -->
+    <script>
+        lucide.createIcons();
+
+        // Smooth scroll and active state management
+        document.addEventListener('DOMContentLoaded', function () {
+            const links = document.querySelectorAll('.sidebar-link');
+            const sections = document.querySelectorAll('section[id]');
+
+            // Handle click events
+            links.forEach(link => {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetSection = document.getElementById(targetId);
+
+                    if (targetSection) {
+                        // Smooth scroll to section
+                        targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+                        // Update active state
+                        links.forEach(l => l.classList.remove('active'));
+                        this.classList.add('active');
+                    }
+                });
+            });
+
+            // Update active state on scroll
+            window.addEventListener('scroll', function () {
+                let current = '';
+
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (pageYOffset >= sectionTop - 200) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                links.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === '#' + current) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
