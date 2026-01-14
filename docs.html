@@ -361,6 +361,37 @@ php artisan pp:reset-password</code></pre>
                                     <code class="text-orange-400 text-sm">sudo ufw status</code>
                                 </div>
                             </div>
+
+                            <!-- Data Retention Policy -->
+                            <div>
+                                <h3 class="text-xl font-bold mb-4">Data Retention Policy</h3>
+                                <p class="text-gray-400 mb-4">
+                                    By default, PingPanther automatically prunes old monitoring data to keep your database size manageable.
+                                </p>
+                                <div class="bg-orange-500/5 border border-orange-500/20 rounded-xl p-6 mb-4">
+                                    <p class="font-semibold mb-3">Default Behavior:</p>
+                                    <p class="text-sm text-gray-300 mb-3">
+                                        The system runs a daily scheduled task that removes monitoring data older than 30 days. This helps maintain optimal database performance.
+                                    </p>
+                                    <div class="code-block rounded-xl p-4 overflow-x-auto">
+                                        <code class="text-orange-400 text-sm">$schedule->command(PruneOldData::class)->daily();</code>
+                                    </div>
+                                </div>
+                                <div class="bg-white/[0.02] border border-white/5 rounded-xl p-6">
+                                    <p class="font-semibold mb-3">Disable Auto-Pruning:</p>
+                                    <p class="text-sm text-gray-400 mb-3">
+                                        If you want to keep all historical data indefinitely, you can disable this feature:
+                                    </p>
+                                    <ol class="space-y-2 text-sm text-gray-300 mb-4">
+                                        <li>1. Edit the scheduler file: <code class="px-2 py-1 bg-white/5 rounded text-orange-400">/var/www/pingpanther/app/Console/Kernel.php</code></li>
+                                        <li>2. Comment out or remove the <code class="px-2 py-1 bg-white/5 rounded text-orange-400">PruneOldData</code> line</li>
+                                        <li>3. No restart required - changes take effect on next schedule run</li>
+                                    </ol>
+                                    <p class="text-sm text-orange-400 font-semibold">
+                                        ⚠️ Warning: Disabling auto-pruning will cause your database to grow continuously. Monitor disk space regularly.
+                                    </p>
+                                </div>
+                            </div>
                         </section>
 
                         <div class="border-t border-white/5 my-12"></div>
