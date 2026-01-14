@@ -186,7 +186,7 @@
                                 </p>
                                 <div class="code-block rounded-xl p-6 overflow-x-auto">
                                     <code
-                                        class="text-orange-400 text-sm">bash &lt;(curl -sSL https://raw.githubusercontent.com/paramientos/pingpantherio/main/install.sh)</code>
+                                        class="text-orange-400 text-sm">bash &lt;(curl -sSL https://demo.pingpanther.online/install.sh)</code>
                                 </div>
                                 <p class="text-sm text-gray-400 mt-4">
                                     The installer will interactively prompt you for:
@@ -322,6 +322,30 @@ yarn install && yarn build
 php artisan migrate --force
 php artisan optimize
 sudo systemctl restart pingpanther-horizon</code></pre>
+                                </div>
+                            </div>
+
+                            <!-- Password Reset -->
+                            <div>
+                                <h3 class="text-xl font-bold mb-4">Reset User Password</h3>
+                                <p class="text-gray-400 mb-4">
+                                    If you forgot your password or need to reset a user's password, use the built-in command:
+                                </p>
+                                <div class="code-block rounded-xl p-6 overflow-x-auto">
+                                    <pre class="text-orange-400 text-sm"><code>cd /var/www/pingpanther
+php artisan pp:reset-password</code></pre>
+                                </div>
+                                <p class="text-sm text-gray-400 mt-4">
+                                    The command will interactively prompt you for:
+                                </p>
+                                <div class="bg-white/[0.02] border border-white/5 rounded-xl p-6 mt-3">
+                                    <ul class="space-y-2 text-sm text-gray-300">
+                                        <li>• User email address</li>
+                                        <li>• New password (hidden input)</li>
+                                    </ul>
+                                    <p class="text-sm text-orange-400 font-semibold mt-4">
+                                        💡 The password will be securely hashed before saving to the database.
+                                    </p>
                                 </div>
                             </div>
 
