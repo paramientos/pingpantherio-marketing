@@ -103,30 +103,6 @@ pingpantherio-marketing/
 - **Text Secondary**: `#9ca3af` (gray-400)
 - **Borders**: `rgba(255, 255, 255, 0.05)`
 
-## 🌐 Deployment
-
-This is a static HTML page that can be deployed to:
-
-- **GitHub Pages**
-- **Netlify**
-- **Vercel**
-- **Cloudflare Pages**
-- Any static hosting service
-
-### Quick Deploy to GitHub Pages
-
-1. Push this repository to GitHub
-2. Go to repository Settings → Pages
-3. Select main branch as source
-4. Your site will be live at `https://yourusername.github.io/pingpantherio-marketing/`
-
-## 📱 Browser Support
-
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
-
 ## 🔗 Links
 
 - **Live Demo**: [pingpanther.online](https://pingpanther.online)
@@ -135,10 +111,6 @@ This is a static HTML page that can be deployed to:
 ## 📝 License
 
 Open Source - Same as PingPanther main project
-
-## 🤝 Contributing
-
-Feel free to submit issues and enhancement requests!
 
 ---
 
