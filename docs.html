@@ -84,7 +84,8 @@
         }
     </script>
 
-    <script defer src="https://cloud.umami.is/script.js" data-website-id="3f8431a6-fe4c-4aa4-8662-313a817368e3"></script>
+    <script defer src="https://cloud.umami.is/script.js"
+        data-website-id="3f8431a6-fe4c-4aa4-8662-313a817368e3"></script>
 </head>
 
 <body class="bg-black text-white antialiased">
@@ -112,7 +113,7 @@
                         <i data-lucide="arrow-left" class="w-4 h-4"></i>
                         Back to Home
                     </a>
-                    <a href="https://github.com/paramientos/pingpantherio" 
+                    <a href="https://github.com/paramientos/pingpantherio"
                         class="flex items-center gap-2 px-3 py-2 text-sm text-gray-400 hover:text-white transition-colors">
                         <i data-lucide="github" class="w-4 h-4"></i>
                         GitHub
@@ -318,6 +319,8 @@ MAIL_FROM_NAME="PingPanther Alerts"</code></pre>
                                 </p>
                                 <div class="code-block rounded-xl p-6 overflow-x-auto">
                                     <pre class="text-orange-400 text-sm"><code>cd /var/www/pingpanther
+# In case of ownership errors during git pull:
+git config --global --add safe.directory /var/www/pingpanther
 git pull origin main
 composer install --no-dev --optimize-autoloader
 yarn install && yarn build
@@ -331,7 +334,8 @@ sudo systemctl restart pingpanther-horizon</code></pre>
                             <div>
                                 <h3 class="text-xl font-bold mb-4">Reset User Password</h3>
                                 <p class="text-gray-400 mb-4">
-                                    If you forgot your password or need to reset a user's password, use the built-in command:
+                                    If you forgot your password or need to reset a user's password, use the built-in
+                                    command:
                                 </p>
                                 <div class="code-block rounded-xl p-6 overflow-x-auto">
                                     <pre class="text-orange-400 text-sm"><code>cd /var/www/pingpanther
@@ -366,30 +370,41 @@ php artisan pp:reset-password</code></pre>
                             <div>
                                 <h3 class="text-xl font-bold mb-4">Data Retention Policy</h3>
                                 <p class="text-gray-400 mb-4">
-                                    By default, PingPanther automatically prunes old monitoring data to keep your database size manageable.
+                                    By default, PingPanther automatically prunes old monitoring data to keep your
+                                    database size manageable.
                                 </p>
                                 <div class="bg-orange-500/5 border border-orange-500/20 rounded-xl p-6 mb-4">
                                     <p class="font-semibold mb-3">Default Behavior:</p>
                                     <p class="text-sm text-gray-300 mb-3">
-                                        The system runs a daily scheduled task that removes monitoring data older than 30 days. This helps maintain optimal database performance.
+                                        The system runs a daily scheduled task that removes monitoring data older than
+                                        30 days. This helps maintain optimal database performance.
                                     </p>
                                     <div class="code-block rounded-xl p-4 overflow-x-auto">
-                                        <code class="text-orange-400 text-sm">$schedule->command(PruneOldData::class)->daily();</code>
+                                        <code
+                                            class="text-orange-400 text-sm">$schedule->command(PruneOldData::class)->daily();</code>
                                     </div>
                                 </div>
                                 <div class="bg-white/[0.02] border border-white/5 rounded-xl p-6">
                                     <p class="font-semibold mb-3">Disable Auto-Pruning:</p>
                                     <p class="text-sm text-gray-400 mb-3">
-                                        If you want to keep all historical data indefinitely, you can disable this feature:
+                                        If you want to keep all historical data indefinitely, you can disable this
+                                        feature:
                                     </p>
                                     <ol class="space-y-2 text-sm text-gray-300 mb-4">
-                                        <li>1. Edit the bootstrap file: <code class="px-2 py-1 bg-white/5 rounded text-orange-400">/var/www/pingpanther/bootstrap/app.php</code></li>
-                                        <li>2. Find the <code class="px-2 py-1 bg-white/5 rounded text-orange-400">withSchedule</code> section</li>
-                                        <li>3. Comment out or remove this line: <code class="px-2 py-1 bg-white/5 rounded text-orange-400">$schedule->command(PruneOldData::class)->daily();</code></li>
+                                        <li>1. Edit the bootstrap file: <code
+                                                class="px-2 py-1 bg-white/5 rounded text-orange-400">/var/www/pingpanther/bootstrap/app.php</code>
+                                        </li>
+                                        <li>2. Find the <code
+                                                class="px-2 py-1 bg-white/5 rounded text-orange-400">withSchedule</code>
+                                            section</li>
+                                        <li>3. Comment out or remove this line: <code
+                                                class="px-2 py-1 bg-white/5 rounded text-orange-400">$schedule->command(PruneOldData::class)->daily();</code>
+                                        </li>
                                         <li>4. No restart required - changes take effect on next schedule run</li>
                                     </ol>
                                     <p class="text-sm text-orange-400 font-semibold">
-                                        ⚠️ Warning: Disabling auto-pruning will cause your database to grow continuously. Monitor disk space regularly.
+                                        ⚠️ Warning: Disabling auto-pruning will cause your database to grow
+                                        continuously. Monitor disk space regularly.
                                     </p>
                                 </div>
                             </div>
